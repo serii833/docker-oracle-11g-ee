@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  oracle-11:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    privileged: true
+    ports:
+      - 1522:1521
+    volumes:
+      # - /home/oracle/oracle-11g/admin:/u01/app/oracle
+      # - /home/oracle/opt:/opt
+      # - /home/oracle/install_11g:/install
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - CHARACTERSET=CL8MSWIN1251
+      - DBCA_TOTAL_MEMORY=4096
+      # - ORACLE_SID=EE
+        #- TZ="Europe/Minsk"
+      # - DBCA_TOTAL_MEMORY=4048
+      # - WEB_CONSOLE=false
+    ulimits:
+      nofile:
+        soft: "65536"
+        hard: "65536"
+      nproc:
+        soft: "65536"
+        hard: "65536"
+
